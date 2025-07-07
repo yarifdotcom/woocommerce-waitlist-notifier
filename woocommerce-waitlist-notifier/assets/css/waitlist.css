@@ -1,0 +1,19 @@
+.woocommerce-waitlist-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2em;
+}
+.woocommerce-waitlist-table th,
+.woocommerce-waitlist-table td {
+    border: 1px solid #e2e2e2;
+    padding: 10px;
+    text-align: left;
+}
+.woocommerce-waitlist-table th {
+    background-color: #f8f8f8;
+}
+.wwn-remove-waitlist {
+    color: #a00;
+    text-decoration: underline;
+    cursor: pointer;
+}
