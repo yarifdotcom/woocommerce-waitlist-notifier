@@ -53,8 +53,8 @@ function wwn_join_waitlist() {
     // Send notification email
     if ( $to ) {
         $product = wc_get_product($product_id);
-        $subject = 'New Waitlist';
-        $body = "A new customer has joined the waitlist:\n\n";
+        $subject = 'New Enquiry';
+        $body = "A new customer has joined the enquiry:\n\n";
         $body .= "Email: $email\n";
         $body .= "Product: " . $product->get_name() . "\n";
         $body .= "Date: $date\n";
@@ -63,7 +63,7 @@ function wwn_join_waitlist() {
     }
 
     wp_send_json_success([
-        'message' => 'You have been added to the waitlist.',
+        'message' => 'You have been added to the enquiry.',
         'redirect_url' => wc_get_account_endpoint_url('waitlists'),
     ]);
     
