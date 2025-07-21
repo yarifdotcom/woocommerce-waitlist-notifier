@@ -5,13 +5,13 @@ $product_id = get_the_ID();
     <a href="<?php echo esc_url(wc_get_page_permalink('myaccount')); ?>" class="button alt"
         style="text-decoration: none !important;margin-bottom: 15px;"
     >
-        Login to Join Waitlist
+        Login to Join Enquiry
     </a>
 <?php else: ?>
 
     <form id="wwn-waitlist-form">
         <input type="hidden" name="product_id" value="<?= esc_attr($product_id); ?>">
-        <button type="submit" class="button alt">Join Waitlist</button>
+        <button type="submit" class="button alt">Join Enquiry</button>
     </form>
 <?php endif; ?>
 
