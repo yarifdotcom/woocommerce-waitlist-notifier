@@ -53,7 +53,7 @@ if ( ! function_exists('wwn_create_table') ) {
         require_once ABSPATH . 'wp-admin/includes/upgrade.php';
         dbDelta($sql);
 
-        // ✅ Set default notification email on first install
+        // Set default notification email on first install
         if (get_option('wwn_notify_email') === false) {
             update_option('wwn_notify_email', get_option('admin_email'));
         }
@@ -61,16 +61,30 @@ if ( ! function_exists('wwn_create_table') ) {
 }
 
 
-// ✅ Add Waitlist tab in My Account
+// Add Waitlist tab in My Account
 add_filter('woocommerce_account_menu_items', 'wwn_add_waitlist_account_tab');
 function wwn_add_waitlist_account_tab($items) {
-    $items['waitlists'] = __('My Waitlist', 'woocommerce');
+    $items['waitlists'] = __('My Enquiry', 'woocommerce');
     return $items;
 }
 
 add_action('init', function () {
     add_rewrite_endpoint('waitlists', EP_ROOT | EP_PAGES);
 });
+
+// Change the page title on the "waitlists" tab
+add_filter('the_title', 'wwn_custom_account_title_for_waitlist', 10, 2);
+function wwn_custom_account_title_for_waitlist($title, $post_id) {
+    if (is_account_page() && get_the_ID() === $post_id && is_user_logged_in()) {
+        global $wp;
+
+        // If the current endpoint is "waitlists", change the title
+        if (isset($wp->query_vars['waitlists'])) {
+            $title = __('My Enquiry List', 'woocommerce');
+        }
+    }
+    return $title;
+}
 
 // Optional: Style the waitlist output
 add_action('wp_enqueue_scripts', function () {
